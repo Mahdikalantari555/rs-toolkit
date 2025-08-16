@@ -45,6 +45,7 @@ All Jupyter notebooks are located in the `notebooks/` folder, organized by topic
 | 12_classification_rf_svm.ipynb | Implement Random Forest and SVM for classification. |
 | 13_kmeans_clustering.ipynb | Perform K-means clustering on remote sensing data. |
 | 14_feature_selection.ipynb | Select important features for ML models. |
+| 24_advanced_preprocessing.ipynb | Apply radiometric calibration, atmospheric correction, and resolution alignment. |
 | **Deep Learning** | |
 | 15_unet_segmentation.ipynb | Use U-Net for semantic segmentation of imagery. |
 | 16_landcover_classification_cnn.ipynb | Classify land cover using a CNN. |
@@ -52,11 +53,25 @@ All Jupyter notebooks are located in the `notebooks/` folder, organized by topic
 | 18_change_detection.ipynb | Detect changes during time between two points. |
 | 19_anomaly_detection.ipynb | Anomaly detection to identify unusual patterns in imagery. |
 | 20_object_detection_yolo.ipynb | Perform object detection using the YOLO model|
+| 27_transfer_learning.ipynb | Fine-tune a pre-trained ResNet for land cover classification. |
+| 28_cloud_detection_deep_learning.ipynb | Detect clouds in Sentinel-2 imagery using a U-Net model. |
+| 31_super_resolution.ipynb | Enhance Sentinel-2 resolution with an SRCNN model. |
 | **Data Download** | |
-| 21_download_data.ipynb | Learn to download Sentinel-2 imagery using and Landsat imagery using |
+| 21_download_data.ipynb | Learn to download Sentinel-2 imagery using and Landsat imagery using 
 | **Visualization** | |
 | 22_folium_interactive_map.ipynb | Create interactive maps with Folium. |
 | 23_kepler_gl_demo.ipynb | Visualize geospatial data with Kepler.gl. |
+| **Multisensor Analysis** | |
+| 25_multisensor_fusion.ipynb | Fuse Sentinel-2 optical and Sentinel-3 thermal data for enhanced analysis. |
+| 29_sar_optical_fusion.ipynb | Combine Sentinel-1 SAR and Sentinel-2 optical data for all-weather analysis. |
+| **Time Series Analysis** | |
+| 26_time_series_animation.ipynb | Create animated visualizations of time series data (e.g., NDVI). |
+| 30_change_detection_timeseries.ipynb | Detect changes in time series using CVA and Siamese networks. |
+| **Automation and Visualization** | |
+| 32_automated_workflow_pipeline.ipynb | Automate data processing with a snakemake pipeline. |
+| 33_dashboard_streamlit.ipynb | Build an interactive Streamlit dashboard for data analysis and visualization. |
+
+
 
 ## Installation
 
