@@ -1,0 +1,192 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Opening and Reading Raster Data with Rasterio\n",
+    "\n",
+    "This notebook demonstrates how to open and read raster data using the `rasterio` library in Python. Raster data, such as satellite imagery or digital elevation models, is commonly stored in formats like GeoTIFF. This tutorial covers:\n",
+    "- Opening a raster file.\n",
+    "- Accessing metadata (e.g., dimensions, coordinate reference system, bands).\n",
+    "- Reading raster data into a NumPy array.\n",
+    "\n",
+    "## Prerequisites\n",
+    "- Install required libraries: `rasterio`, `numpy` (listed in `requirements.txt`).\n",
+    "- A sample GeoTIFF file (e.g., `sample.tif`). Replace the file path with your own raster file.\n",
+    "\n",
+    "## Learning Objectives\n",
+    "- Understand how to use `rasterio` to open raster files.\n",
+    "- Explore raster metadata and data structure.\n",
+    "- Load raster data for further analysis."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import required libraries\n",
+    "import rasterio\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 1: Open a Raster File\n",
+    "\n",
+    "Use `rasterio.open()` to open a GeoTIFF file. Replace `'sample.tif'` with the path to your own raster file (e.g., a satellite image or DEM)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Define the path to the raster file\n",
+    "raster_path = 'sample.tif'\n",
+    "\n",
+    "# Open the raster file\n",
+    "with rasterio.open(raster_path) as src:\n",
+    "    # Read the entire raster data as a NumPy array\n",
+    "    raster_data = src.read()\n",
+    "    # Get metadata\n",
+    "    metadata = src.meta\n",
+    "\n",
+    "# Print metadata\n",
+    "print('Raster Metadata:')\n",
+    "print(metadata)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 2: Explore Raster Metadata\n",
+    "\n",
+    "The metadata contains important information about the raster, such as:\n",
+    "- `width` and `height`: Dimensions of the raster in pixels.\n",
+    "- `crs`: Coordinate Reference System (e.g., EPSG:4326 for WGS84).\n",
+    "- `transform`: Georeferencing information (e.g., pixel size, origin).\n",
+    "- `count`: Number of bands (e.g., 3 for RGB imagery).\n",
+    "\n",
+    "Let’s extract and display specific metadata attributes."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "with rasterio.open(raster_path) as src:\n",
+    "    # Extract specific metadata\n",
+    "    width = src.width\n",
+    "    height = src.height\n",
+    "    num_bands = src.count\n",
+    "    crs = src.crs\n",
+    "    transform = src.transform\n",
+    "\n",
+    "# Print metadata details\n",
+    "print(f'Width: {width} pixels')\n",
+    "print(f'Height: {height} pixels')\n",
+    "print(f'Number of Bands: {num_bands}')\n",
+    "print(f'Coordinate Reference System: {crs}')\n",
+    "print(f'Transform: {transform}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 3: Read Raster Data\n",
+    "\n",
+    "Raster data is stored as a NumPy array with shape `(bands, height, width)`. For example, a 3-band RGB image has shape `(3, height, width)`. You can read specific bands or the entire dataset."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "with rasterio.open(raster_path) as src:\n",
+    "    # Read the first band\n",
+    "    band1 = src.read(1)  # Band indexing starts at 1 in rasterio\n",
+    "\n",
+    "# Print the shape of the data\n",
+    "print(f'Shape of Band 1: {band1.shape}')\n",
+    "print(f'Min value in Band 1: {np.min(band1)}')\n",
+    "print(f'Max value in Band 1: {np.max(band1)}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 4: Working with Multi-Band Data\n",
+    "\n",
+    "For multi-band rasters (e.g., RGB or multispectral imagery), you can read all bands at once and inspect their structure."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "with rasterio.open(raster_path) as src:\n",
+    "    # Read all bands\n",
+    "    all_bands = src.read()  # Shape: (bands, height, width)\n",
+    "\n",
+    "# Print the shape of the full dataset\n",
+    "print(f'Shape of all bands: {all_bands.shape}')\n",
+    "\n",
+    "# Example: Access the red band (assuming band 1 is red in an RGB image)\n",
+    "red_band = all_bands[0]  # Band indexing is 0-based in NumPy\n",
+    "print(f'Shape of Red Band: {red_band.shape}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Next Steps\n",
+    "\n",
+    "- Replace `sample.tif` with your own raster file (e.g., a Sentinel-2 image or DEM).\n",
+    "- Try accessing specific bands or regions of the raster using `src.read(window=...)`.\n",
+    "- Proceed to the next notebook (`02_visualize_raster_matplotlib.ipynb`) to visualize the raster data.\n",
+    "\n",
+    "## Notes\n",
+    "- Ensure the raster file path is correct and the file is accessible.\n",
+    "- If you encounter issues with `rasterio`, verify that GDAL is installed and configured (see `docs/installation.md`).\n",
+    "- For large rasters, consider reading data in chunks using `rasterio` windowed reading."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
