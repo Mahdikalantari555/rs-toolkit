@@ -48,14 +48,14 @@ All Jupyter notebooks are located in the `notebooks/` folder, organized by topic
 | **Deep Learning** | |
 | 15_unet_segmentation.ipynb | Use U-Net for semantic segmentation of imagery. |
 | 16_landcover_classification_cnn.ipynb | Classify land cover using a CNN. |
-| 17_change_detection_with_dl.ipynb | Detect changes using deep learning. |
+| 17_time_series_analysis.ipynb | Time series Analysis for manitoring changes. |
+| 18_change_detection.ipynb | Detect changes during time between two points. |
+| 19_anomaly_detection.ipynb | Anomaly detection to identify unusual patterns in imagery. |
+| 20_object_detection_yolo.ipynb | Perform object detection using the YOLO model|
 | **Data Download** | |
-| 18_download_sentinel_sentinelsat.ipynb | Download Sentinel data using sentinelsat. |
-| 19_download_landsat_landsatxplore.ipynb | Access Landsat imagery with landsatxplore. |
-| 20_gee_python_api.ipynb | Use Google Earth Engine’s Python API. |
+| 21_download_data.ipynb | Learn to download Sentinel-2 imagery using and Landsat imagery using |
 | **Visualization** | |
-| 21_folium_interactive_map.ipynb | Create interactive maps with Folium. |
-| 22_geopandas_plotting.ipynb | Plot vector data with GeoPandas. |
+| 22_folium_interactive_map.ipynb | Create interactive maps with Folium. |
 | 23_kepler_gl_demo.ipynb | Visualize geospatial data with Kepler.gl. |
 
 ## Installation
